@@ -63,8 +63,6 @@ Pour des raisons de sécurité notamment pour les accès à Supabase et Cloudina
 
 ### **5 - Lancer l'application**
 
-#### **Attention** : Avant de lancer l'application frontend, se référer au README de l'API afin que cette dernière soit également lancée.
-
 ```sh
 npm run dev
 ```
