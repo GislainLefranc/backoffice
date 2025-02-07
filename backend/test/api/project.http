@@ -1,0 +1,28 @@
+### Création d'un projet
+POST http://localhost:3000/api/projects
+Content-Type: application/json
+
+{
+    "name": "Projet test1",
+    "description": "Description du projet test1",
+    "clientId": 3
+}
+
+### Récupération de tous les projets d'un client
+GET http://localhost:3000/api/clients/1/projects
+
+### Récupération d'un projet
+GET http://localhost:3000/api/projects/1
+
+### Modification d'un projet
+PUT http://localhost:3000/api/projects/1
+Content-Type: application/json
+
+{
+    "name": "Projet test1 modifié",
+    "description": "Description du projet test1 modifié",
+    "clientId": 1
+}
+
+### Suppression d'un projet
+DELETE http://localhost:3000/api/projects/2

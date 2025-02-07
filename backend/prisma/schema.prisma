@@ -1,0 +1,73 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  admin
+  super_admin
+}
+
+model User {
+  id Int @id @default(autoincrement())
+  firstname String
+  lastname String
+  email String @unique
+  password String
+  role Role
+  image String?
+  comments Comment[]
+}
+
+model Client {
+  id Int @id @default(autoincrement())
+  legal_status String
+  name String
+  email String @unique
+  phone String?
+  address String?
+  city String?
+  zip_code String?
+  contact String
+  projects Project[]
+}
+
+model Project {
+  id Int @id @default(autoincrement())
+  name String
+  description String
+  media Media[]
+  client Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  clientId Int
+  comments Comment[]
+}
+
+model Comment {
+  id        Int   @id @default(autoincrement())
+  content   String
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId Int
+}
+
+model Media {
+  id        Int   @id @default(autoincrement())
+  name      String
+  url       String
+  createdAt DateTime @default(now())
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId Int
+}
+

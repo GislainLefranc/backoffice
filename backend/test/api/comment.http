@@ -1,0 +1,22 @@
+### Création d'un commentaire
+POST http://localhost:3000/api/projects/1/comments
+Content-Type: application/json
+
+{
+    "userId": 1,
+    "content": "Commentaire à supprimer !"
+}
+
+### Récupération de tous les commentaires d'un projet
+GET http://localhost:3000/api/projects/1/comments
+
+### Modification d'un commentaire
+PUT http://localhost:3000/api/projects/1/comments/1
+Content-Type: application/json
+
+{
+    "content": "On modifie le commentaire !"
+}
+
+### Suppression d'un commentaire
+DELETE http://localhost:3000/api/projects/1/comments/3

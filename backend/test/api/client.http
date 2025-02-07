@@ -1,0 +1,39 @@
+### Création de client
+POST http://localhost:3000/api/clients
+Content-Type: application/json
+
+{
+    "legal_status": "SAS",
+    "name": "Agency",
+    "email": "agency@example.fr",
+    "phone": "0611223344",
+    "address": "50 avenue des transports durables",
+    "zip_code": "69003",
+    "city": "Lyon",
+    "contact": "Edouard Dupont"
+}
+
+### Récupération de tous les clients
+GET http://localhost:3000/api/clients
+
+### Récupération d'un client
+GET http://localhost:3000/api/clients/1
+
+### Modification d'un client
+PUT http://localhost:3000/api/clients/4
+Content-Type: application/json
+
+{
+  "legal_status": "EURL",
+  "name": "Digital Agency",
+  "email": "digitalagency@example.com",
+  "phone": "06000000000",
+  "address": "78 rue du web",
+  "city": "Toulouse",
+  "zip_code": "31000",
+  "contact": "Henri Bernard"
+}
+
+### Suppression d'un client
+DELETE http://localhost:3000/api/clients/16
+Content-Type: application/json

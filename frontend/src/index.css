@@ -1,0 +1,5 @@
+@import "tailwindcss";
+
+@theme {
+  --color-odaptos: #0b57f4;
+}
