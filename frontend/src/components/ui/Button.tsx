@@ -13,7 +13,9 @@ const Button: React.FC<ButtonProps> = (props) => {
     <button
       type={props.type}
       onClick={props.onClick}
-      style={{ backgroundColor: props.bgColor, color: props.textColor }}
+      className={
+        props.bgColor + " " + props.textColor + " py-2 px-4 rounded-lg"
+      }
     >
       {props.children}
     </button>

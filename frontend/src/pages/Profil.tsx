@@ -24,7 +24,7 @@ const Profil = () => {
 
   useEffect(() => {
     if (profil) {
-      setUser(profil);
+      setUser(profil); // Mise à jour de l'état de l'utilisateur dès que le profil change
     }
   }, [profil]);
 
@@ -46,7 +46,7 @@ const Profil = () => {
     const image = file[0];
     const reader = new FileReader();
     reader.addEventListener("load", () => {
-      setUser({ ...user, image: reader.result as string });
+      setUser({ ...user, image: reader.result as string }); // Mise à jour de l'image (en base64) de profil
     });
     reader.readAsDataURL(image);
   };

@@ -6,11 +6,13 @@ import ClientDetail from "../pages/ClientDetail";
 import UserDetail from "../pages/UserDetail";
 import Project from "../pages/Project";
 import Profil from "../pages/Profil";
+import Error404 from "../pages/Error404";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layouts />,
+    errorElement: <Error404 />,
     children: [
       {
         path: "/",
