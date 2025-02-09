@@ -10,12 +10,12 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import { createDatasFileOrComment, getDatasById } from "../../../services/api";
 import { CreateMediaModalProps } from "./mediaModal.type";
 
-const CreateMediaModal: React.FC<CreateMediaModalProps> = ({
+const CreateMediaModal = ({
   open,
   onClose,
   project,
   setProject,
-}) => {
+}: CreateMediaModalProps) => {
   const handleSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 

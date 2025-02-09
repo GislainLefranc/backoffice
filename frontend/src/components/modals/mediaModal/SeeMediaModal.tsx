@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Dialog,
   DialogBackdrop,
@@ -8,11 +7,7 @@ import {
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { ViewMediaModalProps } from "./mediaModal.type";
 
-const SeeMediaModal: React.FC<ViewMediaModalProps> = ({
-  open,
-  onClose,
-  media,
-}) => {
+const SeeMediaModal = ({ open, onClose, media }: ViewMediaModalProps) => {
   return (
     <Dialog open={open} onClose={onClose} className="relative z-10">
       <DialogBackdrop

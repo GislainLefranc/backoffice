@@ -9,11 +9,7 @@ import { XMarkIcon, EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import { updateDatas } from "../../../services/api";
 import { UserModalProps } from "./UserModal.type";
 
-const UpdatePasswordModal: React.FC<UserModalProps> = ({
-  open,
-  onClose,
-  user,
-}) => {
+const UpdatePasswordModal = ({ open, onClose, user }: UserModalProps) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);

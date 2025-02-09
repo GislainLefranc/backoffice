@@ -9,15 +9,10 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { ClientModalProps } from "./ClientModal.type";
-import React from "react";
 import { deleteDatas } from "../../../services/api";
 import { useNavigate } from "react-router-dom";
 
-const DeleteClientModal: React.FC<ClientModalProps> = ({
-  open,
-  onClose,
-  client,
-}) => {
+const DeleteClientModal = ({ open, onClose, client }: ClientModalProps) => {
   const navigate = useNavigate();
 
   const handleDeleteSubmit = async () => {

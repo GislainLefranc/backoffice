@@ -10,15 +10,14 @@ import { createDatas } from "../../../services/api";
 import { CreateProjectModalProps } from "./projectModal.type";
 import { Project } from "../../../types/project.type";
 
-const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
+const CreateProjectModal = ({
   open,
   onClose,
   data: client,
   setData: setProject,
-}) => {
+}: CreateProjectModalProps) => {
   const handleSubmit = async (evt: React.FormEvent) => {
     evt.preventDefault();
-
     try {
       const formData = new FormData(evt.target as HTMLFormElement);
       const data = Object.fromEntries(formData.entries());

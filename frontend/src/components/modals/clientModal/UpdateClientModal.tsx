@@ -9,12 +9,12 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import { getDatasById, updateDatas } from "../../../services/api";
 import { ClientModalProps } from "./ClientModal.type";
 
-const UpdateClientModal: React.FC<ClientModalProps> = ({
+const UpdateClientModal = ({
   open,
   onClose,
   client,
   setClient,
-}) => {
+}: ClientModalProps) => {
   const handleSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 

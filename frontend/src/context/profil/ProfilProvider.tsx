@@ -3,9 +3,11 @@ import { getDatasById } from "../../services/api";
 import { User } from "../../types/user.type";
 import { ProfilContext } from "./ProfilContext";
 
-export const ProfilProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+interface ProfilProviderProps {
+  children: React.ReactNode;
+}
+
+export const ProfilProvider = ({ children }: ProfilProviderProps) => {
   const [profil, setProfil] = useState<User | null>(null);
 
   useEffect(() => {

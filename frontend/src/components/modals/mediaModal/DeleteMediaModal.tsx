@@ -9,15 +9,14 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { MediaModalWithProjectProps } from "./mediaModal.type";
-import React from "react";
 import { deleteDatas } from "../../../services/api";
 
-const DeleteMediaModal: React.FC<MediaModalWithProjectProps> = ({
+const DeleteMediaModal = ({
   open,
   onClose,
   media,
   setProject,
-}) => {
+}: MediaModalWithProjectProps) => {
   const handleDeleteSubmit = async () => {
     try {
       await deleteDatas("/media", media.id);

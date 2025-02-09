@@ -10,11 +10,7 @@ import { createDatas } from "../../../services/api";
 import { UsersModalProps } from "./UserModal.type";
 import { User } from "../../../types/user.type";
 
-const CreateUserModal: React.FC<UsersModalProps> = ({
-  open,
-  onClose,
-  setUsers,
-}) => {
+const CreateUserModal = ({ open, onClose, setUsers }: UsersModalProps) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);

@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Dialog,
   DialogBackdrop,
@@ -10,11 +9,11 @@ import { createDatas } from "../../../services/api";
 import { ClientsModalProps } from "./ClientModal.type";
 import { Client } from "../../../types/client.type";
 
-const CreateClientModal: React.FC<ClientsModalProps> = ({
+const CreateClientModal = ({
   open,
   onClose,
   setClients,
-}) => {
+}: ClientsModalProps) => {
   const handleSubmit = async (evt: React.FormEvent) => {
     evt.preventDefault();
 

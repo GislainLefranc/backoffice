@@ -8,16 +8,15 @@ import {
   ExclamationTriangleIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import React from "react";
 import { deleteDatas } from "../../../services/api";
 import { DeleteProjectModalProps } from "./projectModal.type";
 
-const DeleteProjectModal: React.FC<DeleteProjectModalProps> = ({
+const DeleteProjectModal = ({
   open,
   onClose,
   project,
   setProject,
-}) => {
+}: DeleteProjectModalProps) => {
   const handleDeleteSubmit = async () => {
     try {
       await deleteDatas("/projects", project.id);
