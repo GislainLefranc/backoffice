@@ -10,17 +10,14 @@ import {
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../assets/odaptos.webp";
-import { useProfil } from "../context/profil/useProfil";
+import { useAuth } from "../context/auth/useAuth";
 
 const NavBar = () => {
-  const { profil: user } = useProfil();
+  const { user, logout } = useAuth();
 
-  console.log(user);
-
-  const userNavigation = [
-    { name: "Profil", href: "/profil" },
-    { name: "Déconnexion", href: "#" },
-  ];
+  const handleLogout = () => {
+    return logout();
+  };
 
   return (
     <Disclosure as="nav" className="bg-blue-50">
@@ -98,6 +95,15 @@ const NavBar = () => {
                     >
                       Profil
                     </Link>
+                  </MenuItem>
+                  <MenuItem>
+                    <button
+                      type="button"
+                      onClick={handleLogout}
+                      className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:outline-none w-full text-left"
+                    >
+                      Déconnexion
+                    </button>
                   </MenuItem>
                 </MenuItems>
               </Menu>
@@ -182,16 +188,19 @@ const NavBar = () => {
             </div>
           </div>
           <div className="mt-3 space-y-1 px-2">
-            {userNavigation.map((item) => (
-              <DisclosureButton
-                key={item.name}
-                as="a"
-                href={item.href}
-                className="block rounded-md px-3 py-2 text-base font-medium text-blue-950 hover:text-odaptos"
-              >
-                {item.name}
-              </DisclosureButton>
-            ))}
+            <Link
+              to="/profil"
+              className="block rounded-md px-3 py-2 text-base font-medium text-blue-950 hover:text-odaptos"
+            >
+              Profil
+            </Link>
+            <DisclosureButton
+              as="button"
+              onClick={handleLogout}
+              className="block rounded-md px-3 py-2 text-base font-medium text-blue-950 hover:text-odaptos"
+            >
+              Déconnexion
+            </DisclosureButton>
           </div>
         </div>
       </DisclosurePanel>

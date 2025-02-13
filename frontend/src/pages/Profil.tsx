@@ -4,40 +4,40 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { updateDatas } from "../services/api";
 import DeleteUserModal from "../components/modals/userModal/DeleteUserModal";
-import { useProfil } from "../context/profil/useProfil";
+import { useAuth } from "../context/auth/useAuth";
 import { User } from "../types/user.type";
 import UpdatePasswordModal from "../components/modals/userModal/UpdatePasswordModal";
 
 const Profil = () => {
-  const { profil } = useProfil();
+  const { user } = useAuth();
   const navigate = useNavigate();
   const [openDelete, setOpenDelete] = useState(false);
   const [openPassword, setOpenPassword] = useState(false);
-  const [user, setUser] = useState<User>({
-    id: profil?.id || 0,
-    firstname: profil?.firstname || "",
-    lastname: profil?.lastname || "",
-    email: profil?.email || "",
-    role: profil?.role || "admin",
-    image: profil?.image || "",
+  const [userProfil, setUserProfil] = useState<User>({
+    id: user?.id || 0,
+    firstname: user?.firstname || "",
+    lastname: user?.lastname || "",
+    email: user?.email || "",
+    role: user?.role || "admin",
+    image: user?.image || "",
   });
 
   useEffect(() => {
-    if (profil) {
-      setUser(profil); // Mise à jour de l'état de l'utilisateur dès que le profil change
+    if (user) {
+      setUserProfil(user); // Mise à jour de l'état de l'utilisateur dès que le profil change
     }
-  }, [profil]);
+  }, [user]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setUser((prevState) => ({
+    setUserProfil((prevState) => ({
       ...prevState,
       [name]: value,
     }));
   };
 
   const handleOptionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setUser({ ...user, role: e.target.value });
+    setUserProfil({ ...userProfil, role: e.target.value });
   };
 
   const updateImage = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,7 +46,7 @@ const Profil = () => {
     const image = file[0];
     const reader = new FileReader();
     reader.addEventListener("load", () => {
-      setUser({ ...user, image: reader.result as string }); // Mise à jour de l'image (en base64) de profil
+      setUserProfil({ ...userProfil, image: reader.result as string }); // Mise à jour de l'image (en base64) de profil
     });
     reader.readAsDataURL(image);
   };
@@ -54,7 +54,7 @@ const Profil = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (user.id) {
+    if (user && user.id) {
       try {
         updateDatas("/users", user.id, user);
       } catch (error) {
@@ -73,7 +73,7 @@ const Profil = () => {
           <div className="grid grid-cols-1 gap-x-8 gap-y-10 pb-12 w-full max-w-2xl">
             <div className="flex items-center justify-between max-w-2xl">
               <h1 className="text-lg font-semibold text-gray-900">
-                Profil de {user.firstname} {user.lastname}
+                Profil de {userProfil.firstname} {userProfil.lastname}
               </h1>
             </div>
             <div className="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 md:col-span-2">
@@ -85,14 +85,14 @@ const Profil = () => {
                   Photo
                 </label>
                 <div className="mt-2 flex items-center gap-x-3">
-                  {user.image === null ? (
+                  {userProfil.image === null ? (
                     <UserCircleIcon
                       aria-hidden="true"
                       className="size-12 text-gray-300"
                     />
                   ) : (
                     <img
-                      src={user.image}
+                      src={userProfil.image}
                       alt="photo de profil"
                       className="inline-block h-12 w-12 rounded-full object-cover"
                     />
@@ -125,8 +125,8 @@ const Profil = () => {
                     id="firstname"
                     name="firstname"
                     type="text"
-                    value={user.firstname}
-                    placeholder={user ? user.firstname : ""}
+                    value={userProfil.firstname}
+                    placeholder={userProfil ? userProfil.firstname : ""}
                     onChange={handleInputChange}
                     autoComplete="given-name"
                     className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-odaptos sm:text-sm/6"
@@ -146,8 +146,8 @@ const Profil = () => {
                     id="lastname"
                     name="lastname"
                     type="text"
-                    value={user?.lastname}
-                    placeholder={user ? user.lastname : ""}
+                    value={userProfil?.lastname}
+                    placeholder={userProfil ? userProfil.lastname : ""}
                     onChange={handleInputChange}
                     autoComplete="family-name"
                     className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-odaptos sm:text-sm/6"
@@ -167,8 +167,8 @@ const Profil = () => {
                     id="email"
                     name="email"
                     type="email"
-                    value={user.email}
-                    placeholder={user ? user.email : ""}
+                    value={userProfil.email}
+                    placeholder={userProfil ? userProfil.email : ""}
                     onChange={handleInputChange}
                     autoComplete="email"
                     className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-odaptos sm:text-sm/6"
@@ -187,7 +187,7 @@ const Profil = () => {
                   <select
                     id="role"
                     name="role"
-                    value={user.role}
+                    value={userProfil.role}
                     onChange={handleOptionChange}
                     autoComplete="country-name"
                     className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-odaptos sm:text-sm/6"
@@ -238,14 +238,14 @@ const Profil = () => {
       </form>
       <DeleteUserModal
         open={openDelete}
-        user={user}
-        setUser={setUser}
+        user={userProfil}
+        setUser={setUserProfil}
         onClose={() => setOpenDelete(false)}
       />
       <UpdatePasswordModal
         open={openPassword}
-        user={user}
-        setUser={setUser}
+        user={userProfil}
+        setUser={setUserProfil}
         onClose={() => setOpenPassword(false)}
       />
     </>

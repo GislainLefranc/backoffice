@@ -1,0 +1,13 @@
+### Login
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "Gislainlefranc@example.fr",
+  "password": "Odaptos123!"
+}
+
+### Vérification du token
+GET http://localhost:3000/api/auth/me
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczOTM4MTgwNCwiZXhwIjoxNzM5Mzg1NDA0fQ.k2vTaGhuriBpdCWDMXTZIbHe1C3VNCUb81syX2ke3dY

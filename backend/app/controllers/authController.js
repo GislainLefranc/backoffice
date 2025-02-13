@@ -12,7 +12,13 @@ const generateToken = (user, expiresIn) => {
 const authController = {
   login: async (req, res) => {
     try {
-      const { email, password } = req.body;
+      let { email, password } = req.body;
+
+      if (!email || !password) {
+        return res
+          .status(400)
+          .json({ error: 'Email et mot de passe sont requis' });
+      }
 
       email = email.toLowerCase();
 
@@ -47,6 +53,7 @@ const authController = {
           role: user.role,
           firstname: user.firstname,
           lastname: user.lastname,
+          image: user.image,
         },
       });
     } catch (error) {
@@ -102,6 +109,38 @@ const authController = {
       res.status(500).json({
         message: 'Erreur serveur lors de la mise à jour du mot de passe',
       });
+    }
+  },
+  me: async (req, res) => {
+    try {
+      console.log('HEADERS:', req.headers.authorization);
+      const token = req.headers.authorization?.split(' ')[1];
+
+      if (!token) {
+        return res.status(401).json({ message: 'Token manquant' });
+      }
+
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      const user = await prisma.user.findUnique({
+        where: { id: decoded.id },
+        select: {
+          id: true,
+          firstname: true,
+          lastname: true,
+          email: true,
+          role: true,
+          image: true,
+        },
+      });
+
+      if (!user) {
+        return res.status(404).json({ message: 'Utilisateur non trouvé' });
+      }
+
+      res.status(200).json({ user });
+    } catch (error) {
+      console.error('Erreur lors de la vérification du token :', error);
+      res.status(401).json({ message: 'Token invalide' });
     }
   },
 };
